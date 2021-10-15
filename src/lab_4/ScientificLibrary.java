@@ -120,7 +120,7 @@ public class ScientificLibrary {
 
     // Добавление книги в библиотеку по ее номеру в библиотеке
     public void addBook(int number, ScientificBook newBook) {
-        hall.returnItem(cycle(number)[0]).data.addBook(newBook, number);
+        hall.returnItem(cycle(number)[0]).data.addBook(newBook, cycle(number)[1]);
     }
 
     // Удаление книги по ее номеру в библиотеке

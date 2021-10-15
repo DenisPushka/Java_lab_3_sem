@@ -42,11 +42,11 @@ public class main {
 
         ScientificLibraryHall[] arr = new ScientificLibraryHall[]{hall1, hall2, hall3};
 
-/*        ScientificLibrary library = new ScientificLibrary(arr);
+        ScientificLibrary library = new ScientificLibrary(arr);
         System.out.println(library);
-        System.out.println("\nНазвание: " + library.getBestBook().getAuthor() + "\tКнига: " +
-                library.getBestBook().getNameBook() + "\t\tЦена: " +
-                library.getBestBook().getPrice());*/
+//        System.out.println("\nНазвание: " + library.getBestBook().getAuthor() + "\tКнига: " +
+//                library.getBestBook().getNameBook() + "\t\tЦена: " +
+//                library.getBestBook().getPrice());
 
     }
 }
