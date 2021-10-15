@@ -155,9 +155,11 @@ public class ScientificLibrary {
     public String toString() {
         String txt = "\n";
         for (int k = 0; k < hall.countItem(); k++) {
-            txt += "\nЗал: " + hall.returnItem(k).data.getNameHall();
-            txt += "\n\tКниги: " + hall.returnItem(k).data.toString();
+            txt += "\nЗал: " + hall.returnItem(k).data.getNameHall() +
+                    "\n\tКниги: " + hall.returnItem(k).data.toString();
         }
         return txt;
     }
+
+
 }
