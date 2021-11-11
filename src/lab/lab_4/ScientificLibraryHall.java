@@ -1,10 +1,10 @@
-package lab_4;
+package lab.lab_4;
 
-import libraries.ScientificBook;
+import lab.lib.ScientificBook;
 
-public class ScientificLibraryHall {
+public class ScientificLibraryHall implements IHall<IBook> {
     private String nameHall;
-    private List scienceBook; // = new List();?
+    private List scienceBook;
 
     // Геттеры и сеттеры
     public List getScienceBook() {
@@ -35,7 +35,7 @@ public class ScientificLibraryHall {
         this.nameHall = nameHall;
         scienceBook = new List();
         for (int i = 0; i < count; i++) {
-            scienceBook.add(new ScientificBook(), i);
+            scienceBook.add(new ScientificBook("", 0), i);
         }
     }
 
@@ -50,19 +50,19 @@ public class ScientificLibraryHall {
 
     // Методы
     // получения количества книг в зале
-    public int countBook() {
+    public int getCountBook() {
         return scienceBook.countItem();
     }
 
     // Выводящий на экран список названий всех книг в зале
-    public void showNameBook() {
+    public void showBook() {
         for (int i = 0; i < scienceBook.countItem(); i++) {
             System.out.println(scienceBook.returnItem(i).data.getAuthor());
         }
     }
 
     // Получения общей стоимости всех книг в зале
-    public double allPriceBook() {
+    public double priceAllBook() {
         double sum = 0;
         for (int i = 0; i < scienceBook.countItem(); i++) {
             sum += scienceBook.returnItem(i).data.getPrice();
@@ -70,19 +70,20 @@ public class ScientificLibraryHall {
         return sum;
     }
 
-    // Получения книги по ее номеру в зале номеру (возвращает null, если
-    //элемент не найден)
-    public ScientificBook getScientificBook(int number) { return scienceBook.returnItem(number).data; }
+    // Получение книги по ее номеру в зале номеру
+    public IBook getBook(int number) {
+        return scienceBook.returnItem(number).data;
+    }
 
     // Изменения книги по ее номеру
-    public void changeBook(int number, ScientificBook newBook) {
+    public void changeBook(int number, IBook newBook) {
         scienceBook.returnItem(number).data = newBook;
         System.out.println("Данные изменены");
     }
 
     // Добавления книги по номеру
-    public boolean addBook(ScientificBook book, int number) {
-        if (scienceBook.add(book,number)){
+    public boolean addBook(int number, IBook book) {
+        if (scienceBook.add(book, number)) {
             System.out.println("\nКнига добавлена");
             return true;
         }
@@ -91,8 +92,8 @@ public class ScientificLibraryHall {
     }
 
     // Удаления книги по номеру
-    public boolean removeBook(int number){
-        if (scienceBook.remove(number)){
+    public boolean deleteBook(int number) {
+        if (scienceBook.remove(number)) {
             System.out.println("\nКнига успешно удалена");
             return true;
         }
@@ -100,10 +101,10 @@ public class ScientificLibraryHall {
     }
 
     // Книга с самой высокой стоимостью
-    public ScientificBook getBestBook(){
-        ScientificBook maxPrice = scienceBook.returnItem(0).data;
-        for (int n = 0;n < scienceBook.getSize();n++){
-            if(maxPrice.getPrice()<scienceBook.returnItem(n).data.getPrice()){
+    public IBook getBestBook() {
+        IBook maxPrice = scienceBook.returnItem(0).data;
+        for (int n = 0; n < scienceBook.getSize(); n++) {
+            if (maxPrice.getPrice() < scienceBook.returnItem(n).data.getPrice()) {
                 maxPrice = scienceBook.returnItem(n).data;
             }
         }

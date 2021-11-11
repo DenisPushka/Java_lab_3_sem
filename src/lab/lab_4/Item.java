@@ -1,13 +1,11 @@
-package lab_4;
-
-import libraries.ScientificBook;
+package lab.lab_4;
 
 class Item {
-    public ScientificBook data; // данные
+    public IBook data; // данные
     public Item next; // ссылка на такой же следующий элемент
 
     // Конструктор
-    public Item(ScientificBook data){
+    public Item(IBook data) {
         this.data = data;
         next = null;
     }

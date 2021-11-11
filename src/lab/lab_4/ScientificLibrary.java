@@ -1,9 +1,7 @@
-package lab_4;
+package lab.lab_4;
 
-import libraries.ScientificBook;
-
-public class ScientificLibrary {
-    private ListLibraryHall hall;
+public class ScientificLibrary implements ILibrary<IHall, IBook> {
+    private final ListLibraryHall hall;
 
     // Конструкторы
     // Принимающий количество залов и массив количеств книг по залам
@@ -16,7 +14,7 @@ public class ScientificLibrary {
 
     // Принимающий массив залов
     public ScientificLibrary(ScientificLibraryHall[] arrayHall) {
-        hall = new ListLibraryHall();
+        hall = new ListLibraryHall(); //??
         for (int q = 0; q < arrayHall.length; q++) {
             hall.add(arrayHall[q], q + 1);
         }
@@ -32,7 +30,7 @@ public class ScientificLibrary {
     public int getCountBook() {
         int countBook = 0;
         for (int r = 0; r < hall.countItem(); r++) {
-            countBook += hall.returnItem(r).data.countBook();
+            countBook += hall.returnItem(r).data.getCountBook();
         }
         return countBook;
     }
@@ -41,14 +39,14 @@ public class ScientificLibrary {
     public int getPriceAllBook() {
         int sum = 0;
         for (int z = 0; z < hall.countItem(); z++) {
-            sum += hall.returnItem(z).data.allPriceBook();
+            sum += hall.returnItem(z).data.priceAllBook();
         }
         return sum;
     }
 
     // Массива залов библиотеки
-    public ScientificLibraryHall[] getArrayHall() {
-        ScientificLibraryHall[] arr = new ScientificLibraryHall[hall.countItem()];
+    public IHall[] getArrayHall() {
+        IHall[] arr = new IHall[hall.countItem()];
         for (int s = 0; s < hall.countItem(); s++) {
             arr[s] = getHall(s);
         }
@@ -56,23 +54,23 @@ public class ScientificLibrary {
     }
 
     // Объекта зала по его номеру в библиотеке
-    public ScientificLibraryHall getHall(int number) {
+    public IHall getHall(int number) {
         return hall.returnItem(number).data;
     }
 
     // Объекта книги по его номеру в библиотеке
-    public ScientificBook getBook(int number) {
-        return hall.returnItem(cycle(number)[0]).data.getScientificBook(cycle(number)[1]);
+    public IBook getBook(int number) {
+        return (IBook) hall.returnItem(cycle(number)[0]).data.getBook(cycle(number)[1]);
     }
 
     // Отсортированного по убыванию цены массива книг библиотеки
-    public ScientificBook[] sortBooks() {
+    public IBook[] sortBooks() {
         boolean needIteration = true;
         int count = 0;
-        ScientificBook[] arr = new ScientificBook[getCountBook()];
+        IBook[] arr = new IBook[getCountBook()];
         for (int f = 0; f < hall.countItem(); f++) {
-            for (int t = 0; t < hall.returnItem(f).data.countBook(); t++) {
-                arr[count] = hall.returnItem(f).data.getScientificBook(t);
+            for (int t = 0; t < hall.returnItem(f).data.getCountBook(); t++) {
+                arr[count] = (IBook) hall.returnItem(f).data.getBook(t);
                 count++;
             }
         }
@@ -81,7 +79,7 @@ public class ScientificLibrary {
             needIteration = false;
             for (int v = 0; v < arr.length - 1; v++) {
                 if (arr[v].getPrice() < arr[v + 1].getPrice()) {
-                    ScientificBook buff = arr[v];
+                    IBook buff = arr[v];
                     arr[v] = arr[v + 1];
                     arr[v + 1] = buff;
                     needIteration = true;
@@ -95,42 +93,42 @@ public class ScientificLibrary {
     public void show() {
         for (int c = 0; c < hall.countItem(); c++) {
             System.out.println(
-                    "\nНазвание зала: " + hall.returnItem(c).data.getNameHall() +
-                            "\tКол-во книг: " + hall.returnItem(c).data.countBook());
+                    "\nЗал: " + c +
+                            "\tКол-во книг: " + hall.returnItem(c).data.getCountBook());
         }
     }
 
     // Замена зала по его номеру на другой
-    public boolean changeHall(int number, ScientificLibraryHall newHall) {
+    public void changeHall(int number, IHall newHall) {
         if (hall.getSize() < number || number < 0) {
             System.out.println("\nЭлемент не входит в числовой отрезок от 0 до size\n");
-            return false;
         }
         hall.returnItem(number).data = newHall;
 //        hall.remove(number);      //альтернатива
 //        hall.add(newHall, number);
         System.out.println("\nЗал добавлен");
-        return true;
     }
 
     // Замена книги по ее номеру на другую
-    public void changeBook(int number, ScientificBook newBook) {
+    public void changeBook(int number, IBook newBook) {
         hall.returnItem(cycle(number)[0]).data.changeBook(cycle(number)[1], newBook);
     }
 
     // Добавление книги в библиотеку по ее номеру в библиотеке
-    public void addBook(int number, ScientificBook newBook) {
-        hall.returnItem(cycle(number)[0]).data.addBook(newBook, cycle(number)[1]);
+    public boolean addBook(int number, IBook newBook) {
+        hall.returnItem(cycle(number)[0]).data.addBook(cycle(number)[1], newBook);
+        return true;
     }
 
     // Удаление книги по ее номеру в библиотеке
-    public void removeBook(int number) {
-        hall.returnItem(cycle(number)[0]).data.removeBook(cycle(number)[1]);
+    public boolean removeBook(int number) {
+        hall.returnItem(cycle(number)[0]).data.deleteBook(cycle(number)[1]);
+        return true;
     }
 
     // Получение самой лучшей книги в библиотеке
     //(с самой большой ценой)
-    public ScientificBook getBestBook() {
+    public IBook getBestBook() {
         return sortBooks()[0];
     }
 
@@ -139,7 +137,7 @@ public class ScientificLibrary {
         int[] arr = new int[2];
         int count = 0;
         for (int q = 0; q < hall.countItem(); q++) {
-            for (int j = 0; j < hall.returnItem(q).data.countBook(); j++) {
+            for (int j = 0; j < hall.returnItem(q).data.getCountBook(); j++) {
                 if (count == needNumb) {
                     arr[0] = q;
                     arr[1] = j;
@@ -155,11 +153,9 @@ public class ScientificLibrary {
     public String toString() {
         String txt = "\n";
         for (int k = 0; k < hall.countItem(); k++) {
-            txt += "\nЗал: " + hall.returnItem(k).data.getNameHall() +
+            txt += "\nЗал: " + k +
                     "\n\tКниги: " + hall.returnItem(k).data.toString();
         }
         return txt;
     }
-
-
 }

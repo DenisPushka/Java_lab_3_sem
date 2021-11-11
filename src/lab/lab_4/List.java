@@ -1,24 +1,21 @@
-package lab_4;
+package lab.lab_4;
 
-public class ListLibraryHall {
-    private Item2 head;
-    private Item2 tail;
+import lab.lib.ScientificBook;
+
+public class List {
+    private final Item head;
     private int size;
 
-    // Геттер
+    //Геттер
     public int getSize() {
         return size;
     }
 
-    // Конструктор
+    //Конструктор
     // По умолчанию
-    public ListLibraryHall() {
-        head = new Item2(new ScientificLibraryHall());
-        tail = new Item2(new ScientificLibraryHall());
-        head.next = tail;
-        head.prev = tail;
-        tail.next = head;
-        tail.prev = head;
+    public List() {
+        head = new Item(new ScientificBook("", 0));
+        head.next = head;
     }
 
     // Методы
@@ -33,14 +30,14 @@ public class ListLibraryHall {
     }
 
     // Возвращающий ссылку на элемент по номеру (возвращает null, если
-    // элемент не найден
-    public Item2 returnItem(int number) {
+    //элемент не найден)
+    public Item returnItem(int number) {
         if (number > size || number < 0) {
             System.out.println("\nЭлемент в списке отсутствует\n");
             return null;
         }
 
-        Item2 element = head.next;
+        Item element = head.next;
         for (int i = 0; i <= size; i++) {
             if (number == i) {
                 return element;
@@ -51,21 +48,19 @@ public class ListLibraryHall {
     }
 
     // Добавление элемента по заданному номеру возвращает (true/false)
-    public boolean add(ScientificLibraryHall hall, int number) {
+    public boolean add(IBook book, int number) {
         if (number > size + 1 || number < 0) {
             System.out.println("\nЭлемент не входит в числовой отрезок от 0 до size\n");
             return false;
         }
 
-        Item2 newHall = new Item2(hall);
-        Item2 buff = head;
+        Item newBook = new Item(book);
+        Item buff = head;
         for (int i = 0; i < number - 1; i++) {
             buff = buff.next;
         }
-        newHall.next = buff.next;
-        newHall.prev = buff;
-        buff.next.prev = newHall;
-        buff.next = newHall;
+        newBook.next = buff.next;
+        buff.next = newBook;
         size++;
         return true;
     }
@@ -77,14 +72,23 @@ public class ListLibraryHall {
             return false;
         }
 
-        Item2 buff = head;
+        Item buff = head;
         for (int i = 0; i < number - 1; ++i) {
             buff = buff.next;
         }
-        buff.next.next.prev = returnItem(number).prev;
         buff.next = returnItem(number).next;
         size--;
         return true;
     }
 
+    @Override
+    public String toString() {
+        String txt = "";
+        Item element = head.next;
+        for (int k = 0; k <= size; k++) {
+            txt += element.data.getNameBook() + "\n";
+            element = element.next;
+        }
+        return txt;
+    }
 }

@@ -1,12 +1,13 @@
 
-package lab_4;
+package lab;
 
-import libraries.ScientificBook;
-
-import java.util.ArrayList;
+import lab.lab_4.ScientificLibrary;
+import lab.lab_4.ScientificLibraryHall;
+import lab.lib.ChildrenBook;
+import lab.lib.ScientificBook;
 
 public class main {
-    public static <hall3> void main(String ar[]) {
+    public static <hall3> void main(String[] ar) {
         ScientificBook book = new ScientificBook("Овечкин", "математика", 300, 2001, 3);
         ScientificBook i = new ScientificBook("Петров", "химия", 100, 2001, 3);
         ScientificBook q = new ScientificBook("Козлов", "география", 100, 2001, 2);
@@ -28,14 +29,18 @@ public class main {
         chBook3[1] = new ScientificBook("Джефф Джонс", "Аквамен", 675, 2011, 6);
         chBook3[2] = new ScientificBook("Джек Кирби", "Железный человек", 1090, 1985, 6);
 
+
         ScientificLibraryHall hall1 = new ScientificLibraryHall("Научный зал №1", chBook1);
         ScientificLibraryHall hall2 = new ScientificLibraryHall("Научный зал №2", chBook2);
         ScientificLibraryHall hall3 = new ScientificLibraryHall("Научный зал №3", chBook3);
-        hall1.showNameBook();
+        hall1.showBook();
+        ChildrenBook childrenBook1 = new ChildrenBook("Кардсон", 2020);
+        hall1.addBook(1, childrenBook1);
+
         System.out.println(hall1);
         System.out.println(hall2);
         System.out.println(hall3);
-        hall1.changeBook(4,chBook2[0]);
+        hall1.changeBook(4, chBook2[0]);
         System.out.println(hall1);
         System.out.println(hall2);
         System.out.println(hall3);
@@ -44,9 +49,9 @@ public class main {
 
         ScientificLibrary library = new ScientificLibrary(arr);
         System.out.println(library);
-//        System.out.println("\nНазвание: " + library.getBestBook().getAuthor() + "\tКнига: " +
-//                library.getBestBook().getNameBook() + "\t\tЦена: " +
-//                library.getBestBook().getPrice());
-
+        library.sortBooks();
+        System.out.println("Отсортированно");
+        System.out.println(library.getBestBook().getNameBook() + " " + library.getBestBook().getPrice());
+        System.out.println(library);
     }
 }
