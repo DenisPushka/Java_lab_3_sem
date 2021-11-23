@@ -1,10 +1,11 @@
 package lab.lab_4;
 
+import lab.Errors.BookIndexOutOfBoundsException;
 import lab.Interface.IBook;
 import lab.Interface.IHall;
 import lab.lib.ScientificBook;
 
-public class ScientificLibraryHall implements IHall<IBook> {
+public class ScientificLibraryHall implements IHall {
     private String nameHall;
     private List scienceBook;
 
@@ -49,6 +50,13 @@ public class ScientificLibraryHall implements IHall<IBook> {
         }
     }
 
+    public ScientificLibraryHall(IBook[] books) {
+        scienceBook = new List();
+        for (int i = 0; i < books.length; i++) {
+            scienceBook.add(books[i], i + 1);
+        }
+    }
+
     // Принимает имя зала и массив книг
     public ScientificLibraryHall(String nameHall, IBook[] book) {
         this.nameHall = nameHall;
@@ -87,12 +95,21 @@ public class ScientificLibraryHall implements IHall<IBook> {
 
     // Изменения книги по ее номеру
     public void changeBook(int number, IBook newBook) {
+        if (number > scienceBook.getSize() + 1 || number < 0) {
+            System.out.println("\nЭлемент не входит в числовой отрезок от 0 до size\n");
+            throw new BookIndexOutOfBoundsException();
+        }
         scienceBook.returnItem(number).data = newBook;
         System.out.println("Данные изменены");
     }
 
     // Добавления книги по номеру
     public boolean addBook(int number, IBook book) {
+        if (number > scienceBook.getSize() + 1 || number < 0) {
+            System.out.println("\nЭлемент не входит в числовой отрезок от 0 до size\n");
+            throw new BookIndexOutOfBoundsException();
+        }
+
         if (scienceBook.add(book, number)) {
             System.out.println("\nКнига добавлена");
             return true;

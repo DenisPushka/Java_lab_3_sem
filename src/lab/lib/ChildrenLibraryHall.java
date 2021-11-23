@@ -3,7 +3,7 @@ package lab.lib;
 import lab.Interface.IBook;
 import lab.Interface.IHall;
 
-public class ChildrenLibraryHall implements IHall<IBook> {
+public class ChildrenLibraryHall implements IHall {
     private IBook[] childrenBook;
     private String nameHall;
 

@@ -9,6 +9,10 @@ import lab.lab_4.ScientificLibraryHall;
 import lab.lib.ChildrenBook;
 import lab.lib.ScientificBook;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class main {
     public static <hall3> void main(String[] ar) {
         IBook book = new ScientificBook("Овечкин", "математика", 300, 2001, 3);
@@ -56,5 +60,14 @@ public class main {
         System.out.println("Отсортировано");
         System.out.println(library.getBestBook().getNameBook() + " " + library.getBestBook().getPrice());
         System.out.println(library);
+        ILibrary library12 = new ScientificLibrary(arr);
+        try {
+            Libraries.writeLibrary(library12, new FileWriter("library.txt"));
+            ILibrary home = Libraries.readLibrary(new FileReader("library.txt"));
+
+            System.out.println(home);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -4,7 +4,7 @@ import lab.Interface.IBook;
 import lab.Interface.IHall;
 import lab.Interface.ILibrary;
 
-public class ChildrenLibrary implements ILibrary<IHall, IBook> {
+public class ChildrenLibrary implements ILibrary {
     private final IHall[] chilrenLibrHall;
 
     //Конструкторы
@@ -64,7 +64,7 @@ public class ChildrenLibrary implements ILibrary<IHall, IBook> {
         for (int i = 0; i < chilrenLibrHall.length; i++) {
             for (int j = 0; j < chilrenLibrHall[i].getCountBook(); j++) {
                 if (count == numberBooks) {
-                    return (IBook) chilrenLibrHall[i].getBook(j);
+                    return chilrenLibrHall[i].getBook(j);
                 }
                 count++;
             }
@@ -81,7 +81,7 @@ public class ChildrenLibrary implements ILibrary<IHall, IBook> {
 
         for (int i = 0; i < chilrenLibrHall.length; i++) {
             for (int j = 0; j < chilrenLibrHall[i].getCountBook(); j++, count++) {
-                max_Arr[count] = (IBook) chilrenLibrHall[i].getBook(j);
+                max_Arr[count] = chilrenLibrHall[i].getBook(j);
             }
         }
         count = 0;

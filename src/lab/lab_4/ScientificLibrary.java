@@ -1,10 +1,12 @@
 package lab.lab_4;
 
+import lab.Errors.BookIndexOutOfBoundsException;
+import lab.Errors.HallIndexOutOfBoundsException;
 import lab.Interface.IBook;
 import lab.Interface.IHall;
 import lab.Interface.ILibrary;
 
-public class ScientificLibrary implements ILibrary<IHall, IBook> {
+public class ScientificLibrary implements ILibrary {
     private final ListLibraryHall hall;
 
     // Конструкторы
@@ -64,7 +66,7 @@ public class ScientificLibrary implements ILibrary<IHall, IBook> {
 
     // Объекта книги по его номеру в библиотеке
     public IBook getBook(int number) {
-        return (IBook) hall.returnItem(cycle(number)[0]).data.getBook(cycle(number)[1]);
+        return hall.returnItem(cycle(number)[0]).data.getBook(cycle(number)[1]);
     }
 
     // Отсортированного по убыванию цены массива книг библиотеки
@@ -74,7 +76,7 @@ public class ScientificLibrary implements ILibrary<IHall, IBook> {
         IBook[] arr = new IBook[getCountBook()];
         for (int f = 0; f < hall.countItem(); f++) {
             for (int t = 0; t < hall.returnItem(f).data.getCountBook(); t++) {
-                arr[count] = (IBook) hall.returnItem(f).data.getBook(t);
+                arr[count] = hall.returnItem(f).data.getBook(t);
                 count++;
             }
         }
@@ -105,7 +107,7 @@ public class ScientificLibrary implements ILibrary<IHall, IBook> {
     // Замена зала по его номеру на другой
     public void changeHall(int number, IHall newHall) {
         if (hall.getSize() < number || number < 0) {
-            System.out.println("\nЭлемент не входит в числовой отрезок от 0 до size\n");
+            throw new HallIndexOutOfBoundsException();
         }
         hall.returnItem(number).data = newHall;
 //        hall.remove(number);      //альтернатива
@@ -115,17 +117,26 @@ public class ScientificLibrary implements ILibrary<IHall, IBook> {
 
     // Замена книги по ее номеру на другую
     public void changeBook(int number, IBook newBook) {
+        if (number > hall.returnItem(cycle(number)[0]).data.getCountBook() + 1 || number < 0) {
+            throw new BookIndexOutOfBoundsException();
+        }
         hall.returnItem(cycle(number)[0]).data.changeBook(cycle(number)[1], newBook);
     }
 
     // Добавление книги в библиотеку по ее номеру в библиотеке
     public boolean addBook(int number, IBook newBook) {
+        if (number > hall.returnItem(cycle(number)[0]).data.getCountBook() + 1 || number < 0) {
+            throw new BookIndexOutOfBoundsException();
+        }
         hall.returnItem(cycle(number)[0]).data.addBook(cycle(number)[1], newBook);
         return true;
     }
 
     // Удаление книги по ее номеру в библиотеке
     public boolean removeBook(int number) {
+        if (number > hall.returnItem(cycle(number)[0]).data.getCountBook() + 1 || number < 0) {
+            throw new BookIndexOutOfBoundsException();
+        }
         hall.returnItem(cycle(number)[0]).data.deleteBook(cycle(number)[1]);
         return true;
     }

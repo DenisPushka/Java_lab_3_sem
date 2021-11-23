@@ -1,6 +1,6 @@
 package lab.Interface;
 
-public interface ILibrary<T, Y> {
+public interface ILibrary {
     // Количества залов
     int getCountHall();
 
@@ -11,35 +11,35 @@ public interface ILibrary<T, Y> {
     int getPriceAllBook();
 
     // Массива залов библиотеки
-    T[] getArrayHall();
+    IHall[] getArrayHall();
 
     // Объекта зала по его номеру в библиотеке
-    T getHall(int number);
+    IHall getHall(int number);
 
     // Объекта книги по его номеру в библиотеке
-    Y getBook(int number);
+    IBook getBook(int number);
 
     // Отсортированного по убыванию цены массива книг библиотеки
-    Y[] sortBooks();
+    IBook[] sortBooks();
 
     // Выводящий на экран список названий всех залов с количеством книг в них
     void show();
 
     // Замена зала по его номеру на другой
-    void changeHall(int number, T newHall);
+    void changeHall(int number, IHall newHall);
 
     // Замена книги по ее номеру на другую
-    void changeBook(int number, Y newBook);
+    void changeBook(int number, IBook newBook);
 
     // Добавление книги в библиотеку по ее номеру в библиотеке
-    boolean addBook(int number, Y newBook);
+    boolean addBook(int number, IBook newBook);
 
     // Удаление книги по ее номеру в библиотеке
     boolean removeBook(int number);
 
     // Получение самой лучшей книги в библиотеке
     //(с самой большой ценой)
-    Y getBestBook();
+    IBook getBestBook();
 
     ILibrary clone();
 }

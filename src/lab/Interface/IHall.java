@@ -1,6 +1,6 @@
 package lab.Interface;
 
-public interface IHall<T> {
+public interface IHall {
     //Получения общего кол-ва книг в зале
     int getCountBook();
 
@@ -11,13 +11,13 @@ public interface IHall<T> {
     double priceAllBook();
 
     //Получения книги по ее номеру в зале
-    T getBook(int number);
+    IBook getBook(int number);
 
     //Изменения книги по ее номеру
-    void changeBook(int numberBook, T newObject);
+    void changeBook(int numberBook, IBook newObject);
 
     //Добавления книги по номеру
-    boolean addBook(int numberBook, T newObject);
+    boolean addBook(int numberBook, IBook newObject);
 
     //Удаление книги по номеру
     boolean deleteBook(int numberBook);
