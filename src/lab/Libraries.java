@@ -4,10 +4,10 @@ package lab;
 import lab.Interface.IBook;
 import lab.Interface.IHall;
 import lab.Interface.ILibrary;
+import lab.lab_3.Book;
+import lab.lab_3.ChildrenLibrary;
+import lab.lab_3.ScientificBook;
 import lab.lab_4.ScientificLibraryHall;
-import lab.lib.Book;
-import lab.lib.ChildrenLibrary;
-import lab.lib.ScientificBook;
 
 import java.io.*;
 import java.util.Scanner;

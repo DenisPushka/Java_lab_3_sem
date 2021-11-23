@@ -4,10 +4,10 @@ package lab;
 import lab.Interface.IBook;
 import lab.Interface.IHall;
 import lab.Interface.ILibrary;
+import lab.lab_3.ChildrenBook;
+import lab.lab_3.ScientificBook;
 import lab.lab_4.ScientificLibrary;
 import lab.lab_4.ScientificLibraryHall;
-import lab.lib.ChildrenBook;
-import lab.lib.ScientificBook;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -60,6 +60,7 @@ public class main {
         System.out.println("Отсортировано");
         System.out.println(library.getBestBook().getNameBook() + " " + library.getBestBook().getPrice());
         System.out.println(library);
+
         ILibrary library12 = new ScientificLibrary(arr);
         try {
             Libraries.writeLibrary(library12, new FileWriter("library.txt"));
@@ -68,5 +69,16 @@ public class main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        ILibrary cloneLibrary = library.clone();
+        System.out.println(library);
+        System.out.println("++++++++++++");
+        System.out.println(cloneLibrary);
+        System.out.println("--------------");
+        cloneLibrary.changeBook(0, chBook3[2]);
+        System.out.println(library);
+        System.out.println("++++++++++++");
+        System.out.println(cloneLibrary);
+
     }
 }

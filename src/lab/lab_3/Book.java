@@ -1,4 +1,4 @@
-package lab.lib;
+package lab.lab_3;
 
 import lab.Errors.InvalidBookPriceException;
 import lab.Interface.IBook;

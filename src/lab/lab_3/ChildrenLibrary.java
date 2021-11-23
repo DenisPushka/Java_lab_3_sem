@@ -1,4 +1,4 @@
-package lab.lib;
+package lab.lab_3;
 
 import lab.Interface.IBook;
 import lab.Interface.IHall;

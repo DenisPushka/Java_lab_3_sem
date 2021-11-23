@@ -1,4 +1,4 @@
-package lab.lib;
+package lab.lab_3;
 
 import lab.Interface.IBook;
 import lab.Interface.IHall;
@@ -25,6 +25,7 @@ public class Main {
         clHall1.changeBook(1, cloneBk1);
         ch1.showBook();
         clHall1.showBook();
+
 
     }
 }

@@ -18,6 +18,13 @@ public class ScientificLibrary implements ILibrary {
         }
     }
 
+    public ScientificLibrary(int count) {
+        hall = new ListLibraryHall();
+        for (int i = 0; i < count; i++) {
+            hall.add(new ScientificLibraryHall("", 0), i);
+        }
+    }
+
     // Принимающий массив залов
     public ScientificLibrary(IHall[] arrayHall) {
         hall = new ListLibraryHall(); //??
@@ -175,7 +182,10 @@ public class ScientificLibrary implements ILibrary {
     }
 
     public ILibrary clone() {
-        ILibrary newObj = null;
+        ILibrary newObj = new ScientificLibrary(getCountHall());
+        for (int i = 0; i < newObj.getCountHall(); i++) {
+            newObj.changeHall(i, this.getHall(i).clone());
+        }
         return newObj;
     }
 }

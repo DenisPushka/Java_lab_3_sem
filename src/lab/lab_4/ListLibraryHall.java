@@ -4,7 +4,6 @@ import lab.Interface.IHall;
 
 public class ListLibraryHall {
     private final Item2 head;
-    private final Item2 tail;
     private int size;
 
     // Геттер
@@ -16,11 +15,8 @@ public class ListLibraryHall {
     // По умолчанию
     public ListLibraryHall() {
         head = new Item2(new ScientificLibraryHall());
-        tail = new Item2(new ScientificLibraryHall());
-        head.next = tail;
-        head.prev = tail;
-        tail.next = head;
-        tail.prev = head;
+        head.next = head;
+        head.prev = head;
     }
 
     // Методы

@@ -1,35 +1,34 @@
-package lab.lib;
+package lab.lab_3;
 
 import lab.Interface.IBook;
 
-public class ChildrenBook extends Book implements IBook, Cloneable {
-    private int yearChildren;
+public class ScientificBook extends Book implements IBook {
+    private float index;
 
-    //Конструкторы
-    //по умолчанию
-    public ChildrenBook() {
-        yearChildren = 0;
+    // Конструкторы
+    // По умолчанию
+    public ScientificBook() {
+        index = 0;
     }
 
     //С двумя параметрами
-    public ChildrenBook(String author, int year) {
+    public ScientificBook(String author, int year) {
         super(author, year);
-        yearChildren = 0;
+        index = 0;
     }
 
     //Со всеми параметрами
-    public ChildrenBook(String author, String nameBook, double price, int year, int yearChildren) {
+    public ScientificBook(String author, String nameBook, double price, int year, float index) {
         super(author, nameBook, price, year);
-        this.yearChildren = yearChildren;
-
+        this.index = index;
     }
 
-    public int getYearChildren() {
-        return yearChildren;
+    public float getIndex() {
+        return index;
     }
 
-    public void setYearChildren(int yearChildren) {
-        this.yearChildren = yearChildren;
+    public void setIndex(float index) {
+        this.index = index;
     }
 
     @Override

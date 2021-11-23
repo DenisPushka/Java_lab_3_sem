@@ -2,7 +2,7 @@ package lab.lab_4;
 
 import lab.Errors.InvalidBookCountException;
 import lab.Interface.IBook;
-import lab.lib.ScientificBook;
+import lab.lab_3.ScientificBook;
 
 public class List {
     private final Item head;

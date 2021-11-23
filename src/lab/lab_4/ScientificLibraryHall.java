@@ -3,7 +3,7 @@ package lab.lab_4;
 import lab.Errors.BookIndexOutOfBoundsException;
 import lab.Interface.IBook;
 import lab.Interface.IHall;
-import lab.lib.ScientificBook;
+import lab.lab_3.ScientificBook;
 
 public class ScientificLibraryHall implements IHall {
     private String nameHall;
