@@ -64,7 +64,6 @@ public class main {
         try {
             Libraries.writeLibrary(library12, new FileWriter("library.txt"));
             ILibrary home = Libraries.readLibrary(new FileReader("library.txt"));
-
             System.out.println(home);
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package lab.lab_4;
 
+import lab.Errors.InvalidBookCountException;
 import lab.Interface.IBook;
 import lab.lib.ScientificBook;
 
@@ -34,8 +35,7 @@ public class List {
     //элемент не найден)
     public Item returnItem(int number) {
         if (number > size || number < 0) {
-            System.out.println("\nЭлемент в списке отсутствует\n");
-            return null;
+            throw new InvalidBookCountException();
         }
 
         Item element = head.next;
@@ -51,8 +51,7 @@ public class List {
     // Добавление элемента по заданному номеру возвращает (true/false)
     public boolean add(IBook book, int number) {
         if (number > size + 1 || number < 0) {
-            System.out.println("\nЭлемент не входит в числовой отрезок от 0 до size\n");
-            return false;
+            throw new InvalidBookCountException();
         }
 
         Item newBook = new Item(book);
@@ -69,8 +68,7 @@ public class List {
     // Удаление элемента по заданному номеру возвращает (true/false)
     public boolean remove(int number) {
         if (number > size || number < 0) {
-            System.out.println("\nЭлемент не входит в числовой отрезок от 0 до size\n");
-            return false;
+            throw new InvalidBookCountException();
         }
 
         Item buff = head;
