@@ -1,5 +1,6 @@
 package lab.lib;
 
+import lab.Errors.InvalidBookPriceException;
 import lab.Interface.IBook;
 
 public class Book implements IBook, Cloneable {
@@ -19,6 +20,10 @@ public class Book implements IBook, Cloneable {
 
     //Принимает 4 параметра
     public Book(String author, String nameBook, double price, int year) {
+        if (price < 0) {
+            throw new InvalidBookPriceException();
+        }
+
         this.author = author;
         this.nameBook = nameBook;
         this.price = price;
@@ -59,6 +64,9 @@ public class Book implements IBook, Cloneable {
     }
 
     public void setPrice(double price) {
+        if (price < 0) {
+            throw new InvalidBookPriceException();
+        }
         this.price = price;
     }
 
