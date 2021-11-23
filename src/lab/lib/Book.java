@@ -1,8 +1,8 @@
 package lab.lib;
 
-import lab.lab_4.IBook;
+import lab.Interface.IBook;
 
-public class Book implements IBook {
+public class Book implements IBook, Cloneable {
     private String author;
     private String nameBook;
     private double price;
@@ -37,32 +37,41 @@ public class Book implements IBook {
         return author;
     }
 
-    //Сеттеры
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public String getNameBook() {
         return nameBook;
-    }
-
-    public void setNameBook(String nameBook) {
-        this.nameBook = nameBook;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public int getYear() {
         return year;
     }
 
+    //Сеттеры
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setNameBook(String nameBook) {
+        this.nameBook = nameBook;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public IBook clone() {
+        IBook newObj = null;
+        try {
+            newObj = (IBook) super.clone();
+        } catch (CloneNotSupportedException ex) {
+        }
+        return newObj;
     }
 }

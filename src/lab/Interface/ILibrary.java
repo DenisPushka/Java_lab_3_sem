@@ -1,4 +1,4 @@
-package lab.lab_4;
+package lab.Interface;
 
 public interface ILibrary<T, Y> {
     // Количества залов
@@ -40,4 +40,6 @@ public interface ILibrary<T, Y> {
     // Получение самой лучшей книги в библиотеке
     //(с самой большой ценой)
     Y getBestBook();
+
+    ILibrary clone();
 }

@@ -1,5 +1,9 @@
 package lab.lab_4;
 
+import lab.Interface.IBook;
+import lab.Interface.IHall;
+import lab.Interface.ILibrary;
+
 public class ScientificLibrary implements ILibrary<IHall, IBook> {
     private final ListLibraryHall hall;
 
@@ -13,7 +17,7 @@ public class ScientificLibrary implements ILibrary<IHall, IBook> {
     }
 
     // Принимающий массив залов
-    public ScientificLibrary(ScientificLibraryHall[] arrayHall) {
+    public ScientificLibrary(IHall[] arrayHall) {
         hall = new ListLibraryHall(); //??
         for (int q = 0; q < arrayHall.length; q++) {
             hall.add(arrayHall[q], q + 1);
@@ -157,5 +161,10 @@ public class ScientificLibrary implements ILibrary<IHall, IBook> {
                     "\n\tКниги: " + hall.returnItem(k).data.toString();
         }
         return txt;
+    }
+
+    public ILibrary clone() {
+        ILibrary newObj = null;
+        return newObj;
     }
 }

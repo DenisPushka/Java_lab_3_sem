@@ -1,12 +1,12 @@
 package lab.lib;
 
-import lab.lab_4.IBook;
+import lab.Interface.IBook;
 
-public class ChildrenBook extends Book implements IBook {
+public class ChildrenBook extends Book implements IBook, Cloneable {
     private int yearChildren;
 
     //Конструкторы
-    //по умлочанию
+    //по умолчанию
     public ChildrenBook() {
         yearChildren = 0;
     }
@@ -50,5 +50,12 @@ public class ChildrenBook extends Book implements IBook {
     @Override
     public int getYear() {
         return super.getYear();
+    }
+
+    @Override
+    public IBook clone() {
+        IBook newObj = null;
+        newObj = super.clone();
+        return newObj;
     }
 }

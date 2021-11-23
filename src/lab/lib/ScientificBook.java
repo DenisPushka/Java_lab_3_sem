@@ -1,11 +1,19 @@
 package lab.lib;
 
-import lab.lab_4.IBook;
+import lab.Interface.IBook;
 
 public class ScientificBook extends Book implements IBook {
     private float index;
 
+    // Конструкторы
+    // По умолчанию
     public ScientificBook() {
+        index = 0;
+    }
+
+    //С двумя параметрами
+    public ScientificBook(String author, int year) {
+        super(author, year);
         index = 0;
     }
 
@@ -13,12 +21,6 @@ public class ScientificBook extends Book implements IBook {
     public ScientificBook(String author, String nameBook, double price, int year, float index) {
         super(author, nameBook, price, year);
         this.index = index;
-    }
-
-    //С двумя параметрами
-    public ScientificBook(String author, int year) {
-        super(author, year);
-        index = 0;
     }
 
     public float getIndex() {
@@ -47,5 +49,12 @@ public class ScientificBook extends Book implements IBook {
     @Override
     public int getYear() {
         return super.getYear();
+    }
+
+    @Override
+    public IBook clone() {
+        IBook newObj = null;
+        newObj = super.clone();
+        return newObj;
     }
 }

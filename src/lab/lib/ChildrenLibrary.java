@@ -1,8 +1,8 @@
 package lab.lib;
 
-import lab.lab_4.IBook;
-import lab.lab_4.IHall;
-import lab.lab_4.ILibrary;
+import lab.Interface.IBook;
+import lab.Interface.IHall;
+import lab.Interface.ILibrary;
 
 public class ChildrenLibrary implements ILibrary<IHall, IBook> {
     private final IHall[] chilrenLibrHall;
@@ -11,13 +11,17 @@ public class ChildrenLibrary implements ILibrary<IHall, IBook> {
     //Принимающий кол-во залов и массив количеств книг по залам
     public ChildrenLibrary(int counterHall, int[] childrenBooks) {
         chilrenLibrHall = new IHall[counterHall];
-        //for (int i = 0; i < counterHall; i++)
-        //  chilrenLibrHall[i] = new IHall(childrenBooks[i]);
+        for (int i = 0; i < counterHall; i++)
+            chilrenLibrHall[i] = new ChildrenLibraryHall(childrenBooks[i]);
     }
 
     //Принимающий массив залов
     public ChildrenLibrary(IHall[] chilrenLibrBook) {
         this.chilrenLibrHall = chilrenLibrBook;
+    }
+
+    public ChildrenLibrary(int countHall) {
+        chilrenLibrHall = new IHall[countHall];
     }
 
     //Методы
@@ -165,5 +169,13 @@ public class ChildrenLibrary implements ILibrary<IHall, IBook> {
     //Получение самой дорогой книги в библиотеке
     public IBook getBestBook() {
         return sortBooks()[0];
+    }
+
+    public ILibrary clone() {
+        ILibrary newObj = new ChildrenLibrary(getCountHall());
+        for (int i = 0; i < newObj.getCountHall(); i++) {
+            newObj.changeHall(i, this.getHall(i).clone());
+        }
+        return newObj;
     }
 }

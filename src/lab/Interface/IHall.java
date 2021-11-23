@@ -1,4 +1,4 @@
-package lab.lab_4;
+package lab.Interface;
 
 public interface IHall<T> {
     //Получения общего кол-ва книг в зале
@@ -21,4 +21,6 @@ public interface IHall<T> {
 
     //Удаление книги по номеру
     boolean deleteBook(int numberBook);
+
+    IHall clone();
 }

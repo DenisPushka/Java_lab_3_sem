@@ -1,5 +1,7 @@
 package lab.lab_4;
 
+import lab.Interface.IHall;
+
 public class ListLibraryHall {
     private final Item2 head;
     private final Item2 tail;

@@ -1,7 +1,7 @@
 package lab.lib;
 
-import lab.lab_4.IBook;
-import lab.lab_4.IHall;
+import lab.Interface.IBook;
+import lab.Interface.IHall;
 
 public class ChildrenLibraryHall implements IHall<IBook> {
     private IBook[] childrenBook;
@@ -9,6 +9,11 @@ public class ChildrenLibraryHall implements IHall<IBook> {
 
     //Конструкторы
     //Принимает имя зала и кол-во книг
+    public ChildrenLibraryHall(int counter) {
+        nameHall = "";
+        childrenBook = new IBook[counter];
+    }
+
     public ChildrenLibraryHall(String nameHall, int counter) {
         this.nameHall = nameHall;
         childrenBook = new IBook[counter];
@@ -99,5 +104,13 @@ public class ChildrenLibraryHall implements IHall<IBook> {
             }
         }
         return obj;
+    }
+
+    public IHall clone() {
+        IHall newObj = new ChildrenLibraryHall(getCountBook());
+        for (int i = 0; i < newObj.getCountBook(); i++) {
+            newObj.changeBook(i, this.getBook(i).clone());
+        }
+        return newObj;
     }
 }

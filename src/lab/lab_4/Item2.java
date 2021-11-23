@@ -1,5 +1,7 @@
 package lab.lab_4;
 
+import lab.Interface.IHall;
+
 class Item2 {
     public IHall data; // данные
     public Item2 prev; // ссылка на такой же предыдущий элемент

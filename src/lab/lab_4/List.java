@@ -1,5 +1,6 @@
 package lab.lab_4;
 
+import lab.Interface.IBook;
 import lab.lib.ScientificBook;
 
 public class List {

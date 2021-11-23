@@ -1,5 +1,7 @@
 package lab.lab_4;
 
+import lab.Interface.IBook;
+import lab.Interface.IHall;
 import lab.lib.ScientificBook;
 
 public class ScientificLibraryHall implements IHall<IBook> {
@@ -39,8 +41,16 @@ public class ScientificLibraryHall implements IHall<IBook> {
         }
     }
 
+    public ScientificLibraryHall(int count) {
+        nameHall = "";
+        scienceBook = new List();
+        for (int i = 0; i < count; i++) {
+            scienceBook.add(new ScientificBook("", 0), i);
+        }
+    }
+
     // Принимает имя зала и массив книг
-    public ScientificLibraryHall(String nameHall, ScientificBook[] book) {
+    public ScientificLibraryHall(String nameHall, IBook[] book) {
         this.nameHall = nameHall;
         scienceBook = new List();
         for (int i = 0; i < book.length; i++) {
@@ -115,11 +125,19 @@ public class ScientificLibraryHall implements IHall<IBook> {
     public String toString() {
         String txt = "";
         for (int k = 0; k < scienceBook.countItem(); k++) {
-            txt += "\n\t\tНзвание: " + scienceBook.returnItem(k).data.getNameBook() ;
-            txt += "\tАвтор: " + scienceBook.returnItem(k).data.getAuthor() ;
-            txt += "\t\tЦена: " + scienceBook.returnItem(k).data.getPrice() ;
-            txt += "\t\tГод издания: " + scienceBook.returnItem(k).data.getYear() ;
+            txt += "\n\t\tНзвание: " + scienceBook.returnItem(k).data.getNameBook();
+            txt += "\tАвтор: " + scienceBook.returnItem(k).data.getAuthor();
+            txt += "\t\tЦена: " + scienceBook.returnItem(k).data.getPrice();
+            txt += "\t\tГод издания: " + scienceBook.returnItem(k).data.getYear();
         }
         return txt;
+    }
+
+    public IHall clone() {
+        IHall newObj = new ScientificLibraryHall(getCountBook());
+        for (int i = 0; i < newObj.getCountBook(); i++) {
+            newObj.changeBook(i, this.getBook(i).clone());
+        }
+        return newObj;
     }
 }
