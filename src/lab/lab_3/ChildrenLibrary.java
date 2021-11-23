@@ -110,7 +110,7 @@ public class ChildrenLibrary implements ILibrary {
     public void show() {
         int count = 0;
         for (IHall ch : chilrenLibrHall) {
-            System.out.printf("Зал: %s\t Количество книг: %x", count + 1, ch.getCountBook());
+            System.out.printf("Зал: %s\t Количество книг: %x\n", count + 1, ch.getCountBook());
             count++;
         }
     }
@@ -169,6 +169,15 @@ public class ChildrenLibrary implements ILibrary {
     //Получение самой дорогой книги в библиотеке
     public IBook getBestBook() {
         return sortBooks()[0];
+    }
+
+    public String toString() {
+        String txt = "\n";
+        for (int i = 0; i < chilrenLibrHall.length; i++) {
+            txt += "\nЗал: " + (i + 1) +
+                    "\n\tКниги: " + chilrenLibrHall[i].toString();
+        }
+        return txt;
     }
 
     public ILibrary clone() {
