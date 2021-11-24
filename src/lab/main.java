@@ -81,5 +81,7 @@ public class main {
         System.out.println(library);
         System.out.println("++++++++++++");
         System.out.println(cloneLibrary);
+        System.out.println("сравнение одного и того же объекта: " + chBook1.equals(chBook1));
+        System.out.println("сравнение разных объектов: " + chBook1.equals(chBook2));
     }
 }
