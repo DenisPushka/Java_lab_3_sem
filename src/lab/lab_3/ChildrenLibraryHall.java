@@ -106,11 +106,51 @@ public class ChildrenLibraryHall implements IHall {
         return obj;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder txt = new StringBuilder();
+        txt.append("\n\t\tНазвание: " + getNameHall());
+        for (int k = 0; k < childrenBook.length; k++) {
+            txt.append(childrenBook[k].toString());
+        }
+        return txt.toString();
+    }
+
+    @Override
     public IHall clone() {
         IHall newObj = new ChildrenLibraryHall(getCountBook());
         for (int i = 0; i < newObj.getCountBook(); i++) {
             newObj.changeBook(i, this.getBook(i).clone());
         }
         return newObj;
+    }
+
+    @Override
+    public boolean equals(IHall hall) {
+        if (hall.getClass() == this.getClass() && ((ChildrenLibraryHall) hall).nameHall == this.nameHall &&
+                ((ChildrenLibraryHall) hall).childrenBook.length == this.childrenBook.length) {
+            for (int i = 0; i < childrenBook.length; i++) {
+                if (!childrenBook[i].equals(this.childrenBook[i]))
+                    return false;
+               /* if (((ChildrenLibraryHall) hall).childrenBook[i].getClass() != this.childrenBook[i].getClass() ||
+                        ((ChildrenLibraryHall) hall).childrenBook[i].getNameBook().equals(this.childrenBook[i].getNameBook()) ||
+                        ((ChildrenLibraryHall) hall).childrenBook[i].getAuthor().equals(this.childrenBook[i].getAuthor()) ||
+                        ((ChildrenLibraryHall) hall).childrenBook[i].getPrice() != this.childrenBook[i].getPrice() ||
+                        ((ChildrenLibraryHall) hall).childrenBook[i].getYear() != this.childrenBook[i].getYear())
+                    return false;*/
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        final int constant = 29;
+        int result = 0;
+        for (int i = 0; i < this.childrenBook.length; i++) {
+            result += this.childrenBook[i].hashCode();
+        }
+        return constant * result;
     }
 }

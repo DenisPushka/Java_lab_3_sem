@@ -58,4 +58,32 @@ public class ChildrenBook extends Book implements IBook, Cloneable {
         newObj = super.clone();
         return newObj;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder txt = new StringBuilder();
+        txt.append(super.toString() + "\t| Возраст: " + getYearChildren());
+        return txt.toString();
+    }
+
+    @Override
+    public boolean equals(IBook book) {
+        return book.getClass() == this.getClass()
+                && ((ChildrenBook) book).yearChildren == this.yearChildren
+                && book.getAuthor().equals(this.getAuthor())
+                && book.getNameBook().equals(this.getNameBook())
+                && book.getPrice() == this.getPrice()
+                && book.getYear() == this.getYear();
+    }
+
+    @Override
+    public int hashCode() {
+        final int constant = 29;
+        int author = Integer.parseInt(Integer.toBinaryString(Integer.parseInt(this.getAuthor())));
+        int nameBook = Integer.parseInt(Integer.toBinaryString(Integer.parseInt(this.getNameBook())));
+        int price = Integer.parseInt(Integer.toBinaryString((int) this.getPrice()));
+        int year = Integer.parseInt(Integer.toBinaryString(this.getYear()));
+        int yearChildren = Integer.parseInt(Integer.toBinaryString(this.yearChildren));
+        return constant * (author ^ nameBook ^ price ^ year ^ yearChildren);
+    }
 }

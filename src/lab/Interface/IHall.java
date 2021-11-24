@@ -23,4 +23,10 @@ public interface IHall {
     boolean deleteBook(int numberBook);
 
     IHall clone();
+
+    boolean equals(IHall hall);
+
+    int hashCode();
+
+    String toString();
 }

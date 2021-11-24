@@ -42,4 +42,10 @@ public interface ILibrary {
     IBook getBestBook();
 
     ILibrary clone();
+
+    boolean equals(ILibrary library);
+
+    int hashCode();
+
+    String toString();
 }

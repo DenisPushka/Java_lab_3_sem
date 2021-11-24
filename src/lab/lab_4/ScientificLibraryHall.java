@@ -28,7 +28,7 @@ public class ScientificLibraryHall implements IHall {
 
     // Конструкторы
     // По умолчанию
-    public ScientificLibraryHall(){
+    public ScientificLibraryHall() {
         nameHall = "";
         scienceBook = new List();
     }
@@ -140,21 +140,49 @@ public class ScientificLibraryHall implements IHall {
 
     @Override
     public String toString() {
-        String txt = "";
+        StringBuilder txt = new StringBuilder();
         for (int k = 0; k < scienceBook.countItem(); k++) {
-            txt += "\n\t\tНзвание: " + scienceBook.returnItem(k).data.getNameBook();
-            txt += "\tАвтор: " + scienceBook.returnItem(k).data.getAuthor();
-            txt += "\t\tЦена: " + scienceBook.returnItem(k).data.getPrice();
-            txt += "\t\tГод издания: " + scienceBook.returnItem(k).data.getYear();
+            txt.append(scienceBook.returnItem(k).data.toString());
         }
-        return txt;
+        return txt.toString();
     }
 
+    @Override
     public IHall clone() {
         IHall newObj = new ScientificLibraryHall(getCountBook());
         for (int i = 0; i < newObj.getCountBook(); i++) {
             newObj.changeBook(i, this.getBook(i).clone());
         }
         return newObj;
+    }
+
+    @Override
+    public boolean equals(IHall hall) {
+        if (hall.getClass() == this.getClass() && ((ScientificLibraryHall) hall).nameHall == this.nameHall &&
+                ((ScientificLibraryHall) hall).scienceBook.getSize() == this.getCountBook()) {
+            for (int i = 0; i < scienceBook.getSize(); i++) {
+                if (!hall.getBook(i).equals(this.getBook(i)))
+                    return false;
+                /*if (hall.getBook(i).getNameBook() != this.getBook(i).getNameBook() ||
+                        hall.getBook(i).getAuthor().equals(this.getBook(i).getAuthor()) ||
+                        hall.getBook(i).getPrice() != this.getBook(i).getPrice() ||
+                        hall.getBook(i).getYear() != this.getBook(i).getYear()) {
+                    return false;
+                }*/
+            }
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    public int hashCode() {
+        final int constant = 29;
+        int result = 0;
+        for (int i = 0; i < this.scienceBook.getSize(); i++) {
+            result += this.scienceBook.returnItem(i).hashCode();
+        }
+        return constant * result;
     }
 }

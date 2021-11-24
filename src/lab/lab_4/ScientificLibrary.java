@@ -117,8 +117,6 @@ public class ScientificLibrary implements ILibrary {
             throw new HallIndexOutOfBoundsException();
         }
         hall.returnItem(number).data = newHall;
-//        hall.remove(number);      //альтернатива
-//        hall.add(newHall, number);
         System.out.println("\nЗал добавлен");
     }
 
@@ -173,19 +171,54 @@ public class ScientificLibrary implements ILibrary {
 
     @Override
     public String toString() {
-        String txt = "\n";
+        StringBuilder txt = new StringBuilder();
         for (int k = 0; k < hall.countItem(); k++) {
-            txt += "\nЗал: " + (k + 1) +
-                    "\n\tКниги: " + hall.returnItem(k).data.toString();
+            txt.append("\nЗал: " + (k + 1) +
+                    "\n\tКниги: " + hall.returnItem(k).data.toString());
         }
-        return txt;
+        return txt.toString();
     }
 
+    @Override
     public ILibrary clone() {
         ILibrary newObj = new ScientificLibrary(getCountHall());
         for (int i = 0; i < newObj.getCountHall(); i++) {
             newObj.changeHall(i, this.getHall(i).clone());
         }
         return newObj;
+    }
+
+    @Override
+    public boolean equals(ILibrary library) {
+        if (library.getClass() == this.getClass() &&
+                ((ScientificLibrary) library).hall.getSize() == this.hall.getSize() &&
+                library.getCountBook() == this.getCountBook()) {
+            for (int i = 0; i < hall.getSize(); i++) {
+                if (!library.getHall(i).equals(this.getHall(i)))
+                    return false;
+                /*if (library.getHall(i).getClass() != this.getHall(i).getClass()) {
+                    for (int j = 0; j < getHall(i).getCountBook(); j++) {
+                        if (library.getHall(i).getBook(j).getAuthor().equals(this.getHall(i).getBook(j).getAuthor()) ||
+                                library.getHall(i).getBook(j).getNameBook().equals(this.getHall(i).getBook(j).getNameBook()) ||
+                                library.getHall(i).getBook(j).getYear() == this.getHall(i).getBook(j).getYear() ||
+                                library.getHall(i).getBook(j).getPrice() == this.getHall(i).getBook(j).getPrice()) {
+                            return false;
+                        }
+                    }
+                }*/
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        final int constant = 29;
+        int result = 0;
+        for (int i = 0; i < hall.getSize(); i++) {
+            result += hall.returnItem(i).hashCode();
+        }
+        return result;
     }
 }

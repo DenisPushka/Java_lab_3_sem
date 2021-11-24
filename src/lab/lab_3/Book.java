@@ -74,6 +74,16 @@ public class Book implements IBook, Cloneable {
         this.year = year;
     }
 
+    @Override
+    public boolean equals(IBook book) {
+        return book.getClass() == this.getClass()
+                && ((Book) book).author.equals(this.author)
+                && ((Book) book).nameBook.equals(this.nameBook)
+                && ((Book) book).price == this.price
+                && ((Book) book).year == this.year;
+    }
+
+    @Override
     public IBook clone() {
         IBook newObj = null;
         try {
@@ -81,5 +91,23 @@ public class Book implements IBook, Cloneable {
         } catch (CloneNotSupportedException ex) {
         }
         return newObj;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder txt = new StringBuilder();
+        txt.append("\n\t| Автор: " + getAuthor() + "\t| Название: " + getNameBook() + "\t| Цена: " + getPrice() +
+                "\t| Год издания" + getYear());
+        return txt.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        final int constant = 29;
+        int author = Integer.parseInt(Integer.toBinaryString(Integer.parseInt(this.author)));
+        int nameBook = Integer.parseInt(Integer.toBinaryString(Integer.parseInt(this.nameBook)));
+        int price = Integer.parseInt(Integer.toBinaryString((int) this.price));
+        int year = Integer.parseInt(Integer.toBinaryString(this.year));
+        return constant * (author ^ nameBook ^ price ^ year);
     }
 }

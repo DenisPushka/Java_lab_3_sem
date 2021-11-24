@@ -2,7 +2,7 @@ package lab.lab_3;
 
 import lab.Interface.IBook;
 
-public class ScientificBook extends Book implements IBook {
+public class ScientificBook extends Book implements IBook, Cloneable {
     private float index;
 
     // Конструкторы
@@ -56,5 +56,33 @@ public class ScientificBook extends Book implements IBook {
         IBook newObj = null;
         newObj = super.clone();
         return newObj;
+    }
+
+    @Override
+    public boolean equals(IBook book) {
+        return book.getClass() == this.getClass()
+                && ((ScientificBook) book).index == this.index
+                && book.getAuthor().equals(this.getAuthor())
+                && book.getNameBook().equals(this.getNameBook())
+                && book.getPrice() == this.getPrice()
+                && book.getYear() == this.getYear();
+    }
+
+    @Override
+    public int hashCode() {
+        final int constant = 29;
+        int author = Integer.parseInt(Integer.toBinaryString(Integer.parseInt(this.getAuthor())));
+        int nameBook = Integer.parseInt(Integer.toBinaryString(Integer.parseInt(this.getNameBook())));
+        int price = Integer.parseInt(Integer.toBinaryString((int) this.getPrice()));
+        int year = Integer.parseInt(Integer.toBinaryString(this.getYear()));
+        int index = Integer.parseInt(Integer.toBinaryString((int) this.index));
+        return constant * (author ^ nameBook ^ price ^ year ^ index);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder txt = new StringBuilder();
+        txt.append(super.toString() + "\tИндекс: " + getIndex());
+        return txt.toString();
     }
 }

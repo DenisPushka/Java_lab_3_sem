@@ -18,4 +18,10 @@ public interface IBook {
     void setYear(int year);
 
     IBook clone();
+
+    boolean equals(IBook book);
+
+    int hashCode();
+
+    String toString();
 }
