@@ -53,8 +53,8 @@ public class ChildrenBook extends Book implements IBook, Cloneable {
     }
 
     @Override
-    public IBook clone() {
-        IBook newObj = null;
+    public Object clone() {
+        Object newObj = null;
         newObj = super.clone();
         return newObj;
     }
@@ -62,12 +62,14 @@ public class ChildrenBook extends Book implements IBook, Cloneable {
     @Override
     public String toString() {
         StringBuilder txt = new StringBuilder();
-        txt.append(super.toString() + "\t| Возраст: " + getYearChildren());
+        txt.append(super.toString() + "\t| Минимальный возраст: " + getYearChildren());
         return txt.toString();
     }
 
     @Override
     public boolean equals(IBook book) {
+        if (book == null)
+            return false;
         return book.getClass() == this.getClass()
                 && ((ChildrenBook) book).yearChildren == this.yearChildren
                 && book.getAuthor().equals(this.getAuthor())

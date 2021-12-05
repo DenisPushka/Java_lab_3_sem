@@ -148,27 +148,23 @@ public class ScientificLibraryHall implements IHall {
     }
 
     @Override
-    public IHall clone() {
+    public Object clone() {
         IHall newObj = new ScientificLibraryHall(getCountBook());
         for (int i = 0; i < newObj.getCountBook(); i++) {
-            newObj.changeBook(i, this.getBook(i).clone());
+            newObj.changeBook(i, (IBook) this.getBook(i).clone());
         }
         return newObj;
     }
 
     @Override
     public boolean equals(IHall hall) {
+        if (hall == null)
+            return false;
         if (hall.getClass() == this.getClass() && ((ScientificLibraryHall) hall).nameHall == this.nameHall &&
                 ((ScientificLibraryHall) hall).scienceBook.getSize() == this.getCountBook()) {
             for (int i = 0; i < scienceBook.getSize(); i++) {
                 if (!hall.getBook(i).equals(this.getBook(i)))
                     return false;
-                /*if (hall.getBook(i).getNameBook() != this.getBook(i).getNameBook() ||
-                        hall.getBook(i).getAuthor().equals(this.getBook(i).getAuthor()) ||
-                        hall.getBook(i).getPrice() != this.getBook(i).getPrice() ||
-                        hall.getBook(i).getYear() != this.getBook(i).getYear()) {
-                    return false;
-                }*/
             }
             return true;
         }

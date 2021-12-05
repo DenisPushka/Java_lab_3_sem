@@ -22,7 +22,7 @@ public interface IHall {
     //Удаление книги по номеру
     boolean deleteBook(int numberBook);
 
-    IHall clone();
+    Object clone();
 
     boolean equals(IHall hall);
 

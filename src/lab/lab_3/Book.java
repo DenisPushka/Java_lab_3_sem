@@ -76,6 +76,8 @@ public class Book implements IBook, Cloneable {
 
     @Override
     public boolean equals(IBook book) {
+        if (book == null)
+            return false;
         return book.getClass() == this.getClass()
                 && ((Book) book).author.equals(this.author)
                 && ((Book) book).nameBook.equals(this.nameBook)
@@ -84,10 +86,10 @@ public class Book implements IBook, Cloneable {
     }
 
     @Override
-    public IBook clone() {
-        IBook newObj = null;
+    public Object clone() {
+        Object newObj = null;
         try {
-            newObj = (IBook) super.clone();
+            newObj = super.clone();
         } catch (CloneNotSupportedException ex) {
         }
         return newObj;
@@ -96,7 +98,7 @@ public class Book implements IBook, Cloneable {
     @Override
     public String toString() {
         StringBuilder txt = new StringBuilder();
-        txt.append("\n\t| Автор: " + getAuthor() + "\t| Название: " + getNameBook() + "\t| Цена: " + getPrice() +
+        txt.append("\n\t| Автор: " + getAuthor() + "\t| Название: " + getNameBook() +
                 "\t| Год издания" + getYear());
         return txt.toString();
     }

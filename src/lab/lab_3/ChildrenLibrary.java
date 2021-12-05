@@ -182,16 +182,18 @@ public class ChildrenLibrary implements ILibrary {
     }
 
     @Override
-    public ILibrary clone() {
+    public Object clone() {
         ILibrary newObj = new ChildrenLibrary(getCountHall());
         for (int i = 0; i < newObj.getCountHall(); i++) {
-            newObj.changeHall(i, this.getHall(i).clone());
+            newObj.changeHall(i, (IHall) this.getHall(i).clone());
         }
         return newObj;
     }
 
     @Override
     public boolean equals(ILibrary library) {
+        if (library == null)
+            return false;
         if (library.getClass() == this.getClass() &&
                 ((ChildrenLibrary) library).childrenLibriHall.length == this.getCountHall()) {
             for (int i = 0; i < childrenLibriHall.length; i++) {

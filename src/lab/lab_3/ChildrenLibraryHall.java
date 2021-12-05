@@ -117,16 +117,18 @@ public class ChildrenLibraryHall implements IHall {
     }
 
     @Override
-    public IHall clone() {
+    public Object clone() {
         IHall newObj = new ChildrenLibraryHall(getCountBook());
-        for (int i = 0; i < newObj.getCountBook(); i++) {
-            newObj.changeBook(i, this.getBook(i).clone());
+        for (int i = 0; i < this.childrenBook.length; i++) {
+            newObj.changeBook(i, (IBook) this.getBook(i).clone());
         }
         return newObj;
     }
 
     @Override
     public boolean equals(IHall hall) {
+        if (hall == null)
+            return false;
         if (hall.getClass() == this.getClass() && ((ChildrenLibraryHall) hall).nameHall == this.nameHall &&
                 ((ChildrenLibraryHall) hall).childrenBook.length == this.childrenBook.length) {
             for (int i = 0; i < childrenBook.length; i++) {

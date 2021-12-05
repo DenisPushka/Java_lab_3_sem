@@ -17,7 +17,7 @@ public interface IBook {
 
     void setYear(int year);
 
-    IBook clone();
+    Object clone();
 
     boolean equals(IBook book);
 

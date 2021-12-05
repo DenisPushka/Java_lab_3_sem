@@ -9,7 +9,7 @@ public class Main {
         ChildrenBook[] bo = new ChildrenBook[2];
         bo[0] = new ChildrenBook("Достоевский", "Идиот", 450, 2001, 12);
         bo[1] = new ChildrenBook("Лингред", "Карлсон", 550, 2011, 8);
-        IBook cloneBk1 = book1.clone();
+        IBook cloneBk1 = (IBook) book1.clone();
         System.out.println(book1.getNameBook() + " " + book1.getPrice());
         System.out.println(cloneBk1.getNameBook() + " " + cloneBk1.getPrice());
         cloneBk1.setNameBook("as");
@@ -19,7 +19,7 @@ public class Main {
 
         IHall ch1 = new ChildrenLibraryHall("12+", bo);
         System.out.println(ch1);
-        IHall clHall1 = ch1.clone();
+        IHall clHall1 = (IHall) ch1.clone();
         System.out.println(clHall1);
         System.out.println("-----------------------");
         clHall1.changeBook(1, cloneBk1);

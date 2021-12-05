@@ -52,14 +52,16 @@ public class ScientificBook extends Book implements IBook, Cloneable {
     }
 
     @Override
-    public IBook clone() {
-        IBook newObj = null;
+    public Object clone() {
+        Object newObj = null;
         newObj = super.clone();
         return newObj;
     }
 
     @Override
     public boolean equals(IBook book) {
+        if (book == null)
+            return false;
         return book.getClass() == this.getClass()
                 && ((ScientificBook) book).index == this.index
                 && book.getAuthor().equals(this.getAuthor())

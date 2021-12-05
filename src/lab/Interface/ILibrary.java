@@ -41,7 +41,7 @@ public interface ILibrary {
     //(с самой большой ценой)
     IBook getBestBook();
 
-    ILibrary clone();
+    Object clone();
 
     boolean equals(ILibrary library);
 
